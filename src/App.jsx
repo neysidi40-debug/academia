@@ -5,7 +5,7 @@ import ThemeToggle from "./components/ThemeToggle.jsx";
 import { initialData, mockUsers } from "./data/mockData.js";
 import LoginPage from "./pages/LoginPage.jsx";
 import {
-  StudentAgendaPage, StudentFeedbacksPage, StudentHomePage, StudentProfilePage, StudentTrainingDetailPage, StudentTrainingsPage,
+  StudentAgendaPage, StudentHomePage, StudentProfilePage, StudentTrainingDetailPage, StudentTrainingsPage,
 } from "./pages/StudentPages.jsx";
 import {
   TeacherAgendaPage, TeacherFeedbacksPage, TeacherHomePage, TeacherProfilePage, TeacherRegisterStudentPage, TeacherStudentDetailPage, TeacherStudentsPage, TeacherTrainingsPage,
@@ -14,7 +14,6 @@ import {
 const studentLinks = [
   { label: "Início", to: "/aluno/inicio", icon: "home" },
   { label: "Meus treinamentos", to: "/aluno/treinamentos", icon: "training" },
-  { label: "Avaliações", to: "/aluno/feedbacks", icon: "star" },
   { label: "Minha agenda", to: "/aluno/agenda", icon: "calendar" },
   { label: "Meu perfil", to: "/aluno/perfil", icon: "profile" },
 ];
@@ -145,7 +144,6 @@ export default function App() {
         <Route path="treinamentos" element={<StudentTrainingsPage user={user || mockUsers.aluno} data={data} />} />
         <Route path="treinamentos/:trainingId" element={<StudentTrainingDetailPage user={user || mockUsers.aluno} data={data} onUpdate={setData} />} />
         <Route path="agenda" element={<StudentAgendaPage user={user || mockUsers.aluno} data={data} onUpdate={setData} />} />
-        <Route path="feedbacks" element={<StudentFeedbacksPage data={data} />} />
         <Route path="perfil" element={<StudentProfilePage user={user || mockUsers.aluno} onUpdateUser={setUser} onUpdateData={setData} />} />
         <Route index element={<Navigate to="inicio" replace />} />
       </Route>
