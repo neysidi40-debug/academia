@@ -171,14 +171,14 @@ export function StudentTrainingDetailPage({ user, data, onUpdate }) {
       {training.status === "Concluído" && (
         feedback || feedbackSaved ? (
           <section className="content-card" aria-live="polite">
-            <p className="success-note">Obrigado! Seu feedback foi enviado e ficará visível para os outros alunos.</p>
+            <p className="success-note">Obrigado! Seu feedback foi enviado para o professor.</p>
           </section>
         ) : (
           <form className="content-card form-card training-feedback-form" onSubmit={submitFeedback}>
             <div>
               <p className="eyebrow">TREINO CONCLUÍDO</p>
               <h2>Como foi esse treino?</h2>
-              <p className="supporting-text">Sua avaliação será pública para os outros alunos.</p>
+              <p className="supporting-text">Sua avaliação será vista apenas pelo professor.</p>
             </div>
             <fieldset className="star-rating">
               <legend>Sua nota (de 1 a 5 estrelas)</legend>
@@ -205,41 +205,6 @@ export function StudentTrainingDetailPage({ user, data, onUpdate }) {
         )
       )}
       <p className="safety-note">Se sentir dor ou mal-estar, interrompa o exercício e procure orientação do professor.</p>
-    </div>
-  );
-}
-
-export function StudentFeedbacksPage({ data }) {
-  const feedbacks = [...(data.feedbacks || [])].sort((first, second) => second.createdAt.localeCompare(first.createdAt));
-  return (
-    <div className="page">
-      <PageHeader title="Feedbacks dos alunos" description="Avaliações de treinos concluídos, compartilhadas pelos alunos." />
-      {feedbacks.length ? (
-        <div className="card-list">
-          {feedbacks.map((feedback) => (
-            <article className="content-card feedback-card" key={feedback.id}>
-              <div className="feedback-card__heading">
-                <div>
-                  <h2>{feedback.trainingTitle}</h2>
-                  <p>{feedback.studentName}</p>
-                </div>
-                <span className="feedback-rating" role="img" aria-label={`${feedback.rating} de 5 estrelas`}>
-                  {"★".repeat(feedback.rating)}{"☆".repeat(5 - feedback.rating)}
-                  <small>{feedback.rating}/5</small>
-                </span>
-              </div>
-              <p className="feedback-card__comment">{feedback.comment}</p>
-              <time dateTime={feedback.createdAt}>{new Intl.DateTimeFormat("pt-BR", { day: "numeric", month: "long", year: "numeric" }).format(new Date(feedback.createdAt))}</time>
-            </article>
-          ))}
-        </div>
-      ) : (
-        <div className="empty-state">
-          <h2>Ainda não há feedbacks</h2>
-          <p>Quando os alunos avaliarem treinos concluídos, os comentários aparecerão aqui.</p>
-          <Link className="button button--secondary" to="/aluno/treinamentos"><Icon name="training" />Ver meus treinos</Link>
-        </div>
-      )}
     </div>
   );
 }
